@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Create Casez</h4>
+                <h4 class="modal-title">Create Cases</h4>
             </div>
             <div class="row">
               <div class="col-md-6">
