@@ -30,8 +30,37 @@ Route::get('Casesjsstructures','ReportCController@CaseReportjss');
 
 Route::get('jsonlogoinstructure', 'UserCController@jslogin');
 
+Route::get('dayshiftapis', 'Service_bookingController@getShift_days');
+Route::get('nigthShiftapi', 'Service_bookingController@getShift_Nigth');
+
+
+Route::post('creatdayshiftapi', 'Service_bookingController@create_dayshift');
+Route::post('creatnigthShiftapi', 'Service_bookingController@create_nigth');
+
+
+
 
 Route::group(array('prefix' => 'api/v1'), function() {
+
+Route::post('caseconfirmation', 'Students_profile_controller@caseconfirmation');
+Route::post('calander_shith', 'Students_profile_controller@calander_shith');
+
+  Route::post('pancak', 'Students_profile_controller@studentpancakbooloing');
+  Route::post('useshiftlog', 'Students_profile_controller@shift_report');
+	Route::get('getuniversities', 'Students_profile_controller@getuniversities');
+
+	Route::get('getprovinces', 'Students_profile_controller@getprovinces');
+	Route::get('student', 'Students_profile_controller@index');
+	Route::post('studentprofile', 'Students_profile_controller@createprofile');
+	Route::post('studentlogin', 'Students_profile_controller@studentlogin');
+
+
+	Route::post('booktimeoff', 'Service_bookingController@booktimeoff');
+
+	Route::get('escalate', 'CasesController@escalate');
+	Route::post('emergencytype', 'Service_bookingController@emergencytype');
+
+	Route::post('volunterdetails', 'Service_bookingController@volunterdetails');
     Route::post('actionteken', 'DepartController@action');
 	Route::post('Casetype', 'DepartController@castype');
     Route::post('subcategories', 'DepartController@index');
@@ -937,7 +966,8 @@ if ($from == 'sub_category')
               ->lists('name', 'slug');
 }
 
-return $listing;
+
+return Response::json($listing);
 });
 
 Route::get('/api/dropdownCaseType/{to}/{from}', function($to,$from){
@@ -951,7 +981,23 @@ if ($from == 'case_type')
               ->where('case_type','=',$object->id)
               ->orderBy('name','ASC')
               ->lists('name', 'id');
+
+
 }
+
+if ($from == 'case_sub_type')
+{
+
+   $object = CaseSubType::where('id','=',$id)->first();
+
+  $listing = DB::table('cases_sub_sub_types')
+              ->where('case_type','=',$object->id)
+              ->orderBy('name','ASC')
+              ->lists('name', 'id');
+
+
+}
+
 
 return $listing;
 });
@@ -988,7 +1034,7 @@ else {
 if ($from == 'category')
 {
   $listing = DB::table('sub-sub-categories')
-              ->where('category','=',$object->id)
+              ->where('sub_category','=',$object->id)
               ->orderBy('name','ASC')
               ->lists('name', 'slug');
 
@@ -1177,10 +1223,3 @@ Route::get('group-users-list/{id}', ['middleware' => 'auth', 'uses' => 'Permissi
 
 
 Route::get('map', ['middleware' => 'auth', 'uses' => 'MapController@index']);
-
-
-
-
-
-
-

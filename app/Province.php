@@ -1,13 +1,15 @@
-<?php namespace App;
+<?php
 
-use Illuminate\Database\Eloquent\Model as Eloquent;
+namespace App;
 
-class Province extends Eloquent
+use Illuminate\Database\Eloquent\Model;
+
+class Province extends Model
 {
-
-
-    protected $table    = 'provinces';
-    protected $fillable = ['name','slug','active'];
-
-
+   
+   public  function  listprovinces (){
+	   
+     return $this->hasMany('App\Universities');
+	   
+   }
 }

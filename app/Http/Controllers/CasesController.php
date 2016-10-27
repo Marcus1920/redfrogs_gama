@@ -34,6 +34,7 @@ use App\CaseRelated;
 use App\CasePoi;
 use App\Poi;
 use App\PoiAssociate;
+use App\UserNew ; 
 
 
 class CasesController extends Controller
@@ -809,15 +810,25 @@ class CasesController extends Controller
     {
 
         $addresses     = explode(',',$request['addresses']);
+		
+		
         $caseOwners    = CaseOwner::where('case_id','=',$request['caseID'])->get();
+		
         $typeMessage   = ($request['modalType'] == 'Allocate')? 'allocated' : 'referred';
+		dd($caseOwners);
         $typeStatus    = ($request['modalType'] == 'Allocate')? 'Allocated' : 'Referred';
-
 
 
         foreach ($caseOwners as $caseOwner) {
 
-            $user =  User::find($caseOwner->user);
+
+ 
+
+
+
+          $user =  UserNew::where('id', '=', 29)->get()->first();
+
+			
             $data = array(
 
                 'name'          => $user->name,
@@ -829,8 +840,8 @@ class CasesController extends Controller
 
             \Mail::send('emails.caseEscalation',$data, function($message) use ($user)
             {
-                $message->from('info@siyaleader.net', 'Siyaleader');
-                $message->to($user->email)->subject("Siyaleader Notification - Case Referred: " );
+                $message->from('info@Redfros.net', 'Siyaleader');
+                $message->to($user->email)->subject("Redfrogs  Notification - Case Referred: " );
 
             });
 
@@ -905,13 +916,13 @@ class CasesController extends Controller
 
             \Mail::send('emails.caseEscalated',$data, function($message) use ($address,$typeStatus)
             {
-                $message->from('info@siyaleader.net', 'Siyaleader');
-                $message->to($address)->subject("Siyaleader Notification - Case $typeStatus: " );
+                $message->from('info@Redfrogs.net', 'Siyaleader');
+                $message->to($address)->subject("Redfrogs Notification - Case $typeStatus: " );
 
             });
 
             \Mail::send('emails.caseEscalatedSMS',$data, function($message) use ($cellphone) {
-                $message->from('info@siyaleader.net', 'Siyaleader');
+                $message->from('info@Redfros.net', 'Siyaleader');
                 $message->to('cooluma@siyaleader.net')->subject("REFER: $cellphone" );
 
             });
@@ -921,8 +932,9 @@ class CasesController extends Controller
 
         }
 
-        return response()->json(['status' => 'ok', 'typeStatus' => $typeStatus]);
+      //  dd(['status' => 'ok', 'typeStatus' => $typeStatus]);
         //return "ok";
+		  return response()->json(['status' => 'ok', 'typeStatus' => $typeStatus]);
 
     }
 

@@ -67,8 +67,9 @@ class DepartController extends Controller
 	 public  function   action (Request $request){
 		 
 		$key     = \Input::get('api_key');
+		
 			
-		   $key     ="57ea53e62d40e";
+		   //$key     ="57ea53e62d40e";
 		   $api_key      = UserNew::select('api_key')->where('api_key','=',$key)->first();
 	
              if($api_key != null && $api_key != "null")
@@ -96,8 +97,7 @@ $key     = \Input::get('api_key');
 $id    = \Input::get('id');
 $comments = Category::find($id)->subcategoriess;
 
-	
-			
+
 			 $response = array();
 		   //$key     ="57ea53e62d40e";
 		   $api_key      = UserNew::select('api_key')->where('api_key','=',$key)->first();

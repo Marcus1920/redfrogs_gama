@@ -38,26 +38,26 @@
         <!-- DataTables Responsive CSS -->
         <link href="{{ asset('/bower_components/datatables-responsive/css/responsive.dataTables.scss') }}" rel="stylesheet">
 
-		 <style>  
+		 <style>
 
  body {
 	 
 
-	  
+
 	   background-image: url("{{ asset('/img/web_bg_red.jpg') }}");
-	 
- }    
+
+ }
 
 
 		 </style>
-		
+
     </head>
     <body>
 
         <header id="header" class="media">
             <a href="" id="menu-toggle"></a>
             <a class="logo pull-left" href="#">
-           
+
             </a>
 
             <div class="media-body">
@@ -132,14 +132,14 @@
                         <div id="sidebar-calendar"></div>
                     </div>
 					 <div style="height:auto;">
-                       
+
                     </div>
-		
+
                 </div>
 
                 <!-- Side Menu -->
                 <ul class="list-unstyled side-menu">
-				
+
 
                 @if(isset($userViewCalendarPermission) && $userViewCalendarPermission->permission_id =='13')
                     <li {{ (Request::is('map') ? "class=active" : '') }}>
@@ -148,7 +148,7 @@
                         </a>
                     </li>
                 @endif
-	     
+
 
                 @if(isset($userViewCalendarPermission) && $userViewCalendarPermission->permission_id =='13')
                     <li {{ (Request::is('calendar') ? "class=active" : '') }}>
@@ -157,7 +157,7 @@
                         </a>
                     </li>
                 @endif
-			
+
                 @if(isset($userViewCasesPermission) && $userViewCasesPermission->permission_id =='15')
                     <li {{ (Request::is('home') ? "class=active" : '') }}>
                         <a class="sa-side-folder" href="{{ url('home') }}">
@@ -165,9 +165,9 @@
                         </a>
                     </li>
                 @endif
-				
-					
-			
+
+
+
                 @if(isset($userViewAdministrationPermission) && $userViewAdministrationPermission->permission_id =='14')
 
                     <li {{ (Request::is('list-users') ? "class=active dropdown" : 'dropdown') }}>
@@ -225,14 +225,14 @@
                             @if(isset($userViewUsersPermission) && $userViewUsersPermission->permission_id =='10')
 
                             <li><a href="{{ url('list-users') }}"><span class="badge badge-r">{{ count($noUsers,0) }}</span>Users</a></li>
-							
+
                              @endif
-							 
+
 							 @if(isset($userViewPOIPermission) && $userViewPOIPermission->permission_id =='11')
 
                             <li><a href="{{ url('list-poi-users') }}"><span class="badge badge-r">{{ count($noPOIUsers,0) }}</span>POI</a></li>
                             @endif
-                          
+
 
                             @if(isset($userViewPermissionsPermission) && $userViewPermissionsPermission->permission_id =='12')
                               <li><a href="{{ url('list-permissions') }}"><span class="badge badge-r">{{ count($noPermissions,0) }}</span>Permissions</a></li>
@@ -251,12 +251,12 @@
                    @endif
 
                 </ul>
-				
-			
+
+
             </aside>
-				 
-			
-        	
+
+
+
             <!-- Content -->
             <section id="content" class="container">
                 @include('messages.list')
@@ -267,9 +267,9 @@
                 @include('addressbook.globalAdd')
                 @include('chat.list')
             </section>
-			
-			
-			
+
+
+
         </section>
 
         <!-- Javascript Libraries -->
@@ -527,12 +527,12 @@
 
         @include('functions.caseModal')
         @yield('footer')
-	  
-		  <div class="s-widget m-b-25" style="">		 
-            
+
+		  <div class="s-widget m-b-25" style="">
+
        <img class="" src="{{ asset('/images/dashboard_logo.png') }}"  style="display: block;  width:150px;"  alt="">   </p>
-           
+
        </div>
-      
+
     </body>
 </html>
